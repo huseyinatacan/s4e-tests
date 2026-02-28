@@ -44,7 +44,7 @@
 10. Try to Add Asset with description longer than 300 characters:
     - **Pass:** The description is cut to 300 characters.
 11. Try to add asset with empty description:
-   - **Fail:** System does not disable the "Add Asset" button when the description is empty.
+    - **Fail:** System does not disable the "Add Asset" button when the description is empty.
 12. Try to Add Asset with description shorter than 3 characters:
     - **Pass:** System disables the "Add Asset" button when the description is shorter than 3 characters.
 13. Try to Add Asset with description exactly 3 characters long:
