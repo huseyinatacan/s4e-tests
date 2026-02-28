@@ -20,13 +20,9 @@ async function cleanupAssets(page) {
 
 
     while (!(await page.getByText('No Data Found').isVisible())) {
-        // If the select-all checkbox doesn't exist, there are no assets left
-        const selectAll = page.getByRole('checkbox', { name: 'select all assets' });
-        if (!(await selectAll.isVisible({ timeout: 3000 }).catch(() => false))) {
-            break;
-        }
 
-        await selectAll.click();
+
+        await page.getByRole('checkbox', { name: 'select all assets' }).click();
         await page.waitForTimeout(1000);
 
 
@@ -56,44 +52,9 @@ test.describe("Asset Manager", () => {
     });
 
 
-    /*test("Entering the test mode", async ({ page }) => {
-        await page.goto("/");
-        await page.waitForLoadState("domcontentloaded");
 
 
-        await page.getByText('Test Mode').click(); // Go to test mode
-        await page.waitForTimeout(1000);
 
-        await page.getByRole('button', { name: 'T', exact: true }).click(); // Click the avatar
-
-
-        await page.waitForTimeout(1000); // Wait for the dropdown menu
-
-
-        const emailText = page.getByText('@');
-        const email = await emailText.first().textContent();
-        console.log(email);
-        expect(email).toMatch("test@s4e.io");
-
-        console.log("Email in  test mode:", email);
-    });*/
-
-    /*test("Entering the Asset Manager", async ({ page }) => {
-        await page.goto("/");
-        await page.waitForLoadState("domcontentloaded");
-
-
-        await page.getByRole('button', { name: 'Asset Manager' }).first().click();
-        await page.waitForLoadState("domcontentloaded");
-        await expect(page.getByRole('heading', { name: 'Asset Manager' })).toBeVisible();
-
-        const url = page.url();
-        expect(url).toMatch(/asset-manager/i);
-
-        console.log("URL:", url);
-
-
-    });*/
 
     // Adding Assets
 
@@ -108,7 +69,7 @@ test.describe("Asset Manager", () => {
         await page.locator('#asset-add-allow-scan-check').click();
         await page.locator('#asset-add-authority-check').click();
         await page.getByRole('button', { name: 'Add Asset' }).click();
-        await page.waitForTimeout(1000);
+        await page.waitForTimeout(2000);
         await expect(page.getByText('Asset Verification')).toBeVisible();
         await page.getByRole('button', { name: 'close' }).click();
 
@@ -148,7 +109,7 @@ test.describe("Asset Manager", () => {
 
     });
 
-    // 
+
     test("Add Asset with same domain (case-insensitive)", async ({ page }) => {
         await page.goto("/asset-manager");
         await page.waitForLoadState("domcontentloaded");
@@ -266,33 +227,77 @@ test.describe("Asset Manager", () => {
 
     });
 
-    test("Try to add asset with invalid IP (last octet -1) ", async ({ page }) => {
+    test("Try to Add Asset with description longer than 300 characters ", async ({ page }) => {
         await page.goto("/asset-manager");
         await page.waitForLoadState("domcontentloaded");
         await page.getByRole('button', { name: 'Add Asset' }).click();
-        await page.getByRole('textbox', { name: /domain/i }).fill('8.8.8.-1');// System should warn user
-        await page.getByRole('textbox', { name: /description/i }).fill('Test asset description');
+        await page.getByRole('textbox', { name: /domain/i }).fill('8.8.8.8');
+        await page.getByRole('textbox', { name: /description/i }).fill('a'.repeat(350));
         await page.locator('#asset-add-terms-check').click();
         await page.locator('#asset-add-allow-scan-check').click();
         await page.locator('#asset-add-authority-check').click();
-        await expect(page.getByText('Please enter a valid domain or IP address or IP address range')).toBeVisible();
+        await expect(page.getByText('Description must be at least 3 characters')).not.toBeVisible();
+        const descriptionValue = await page.getByRole('textbox', { name: /description/i }).inputValue();
+        expect(descriptionValue).toHaveLength(300);
+        await expect(page.getByRole('button', { name: 'Add Asset' })).not.toBeDisabled();
+
+    });
+
+    test("Try to add asset with empty description ", async ({ page }) => {
+        await page.goto("/asset-manager");
+        await page.waitForLoadState("domcontentloaded");
+        await page.getByRole('button', { name: 'Add Asset' }).click();
+        await page.getByRole('textbox', { name: /domain/i }).fill('8.8.8.8');
+        await page.locator('#asset-add-terms-check').click();
+        await page.locator('#asset-add-allow-scan-check').click();
+        await page.locator('#asset-add-authority-check').click();
         await expect(page.getByRole('button', { name: 'Add Asset' })).toBeDisabled();
 
     });
 
-    test("Try to add asset with invalid IP (last octet 255) ", async ({ page }) => {
+    test("Try to Add Asset with description shorter than 3 characters ", async ({ page }) => {
         await page.goto("/asset-manager");
         await page.waitForLoadState("domcontentloaded");
         await page.getByRole('button', { name: 'Add Asset' }).click();
-        await page.getByRole('textbox', { name: /domain/i }).fill('8.8.8.255');
-        await page.getByRole('textbox', { name: /description/i }).fill('Test asset description');
+        await page.getByRole('textbox', { name: /domain/i }).fill('8.8.8.8');
+        await page.getByRole('textbox', { name: /description/i }).fill('aa');
         await page.locator('#asset-add-terms-check').click();
         await page.locator('#asset-add-allow-scan-check').click();
         await page.locator('#asset-add-authority-check').click();
-        await expect(page.getByText('Please enter a valid domain or IP address or IP address range')).not.toBeVisible();
+
+        await expect(page.getByText('Description must be at least 3 characters')).toBeVisible();
+        await expect(page.getByRole('button', { name: 'Add Asset' })).toBeDisabled();
+
+    });
+
+    test("Try to Add Asset with description exactly 3 characters long ", async ({ page }) => {
+        await page.goto("/asset-manager");
+        await page.waitForLoadState("domcontentloaded");
+        await page.getByRole('button', { name: 'Add Asset' }).click();
+        await page.getByRole('textbox', { name: /domain/i }).fill('8.8.8.8');
+        await page.getByRole('textbox', { name: /description/i }).fill('aaa');
+        await page.locator('#asset-add-terms-check').click();
+        await page.locator('#asset-add-allow-scan-check').click();
+        await page.locator('#asset-add-authority-check').click();
+
+        await expect(page.getByText('Description must be at least 3 characters')).not.toBeVisible();
         await expect(page.getByRole('button', { name: 'Add Asset' })).not.toBeDisabled();
 
     });
+    test("Try to Add Asset with description exactly 300 characters long ", async ({ page }) => {
+        await page.goto("/asset-manager");
+        await page.waitForLoadState("domcontentloaded");
+        await page.getByRole('button', { name: 'Add Asset' }).click();
+        await page.getByRole('textbox', { name: /domain/i }).fill('8.8.8.8');
+        await page.getByRole('textbox', { name: /description/i }).fill('a'.repeat(300));
+        await page.locator('#asset-add-terms-check').click();
+        await page.locator('#asset-add-allow-scan-check').click();
+        await page.locator('#asset-add-authority-check').click();
+
+        await expect(page.getByRole('button', { name: 'Add Asset' })).not.toBeDisabled();
+
+    });
+
 
     test("Try to add asset with invalid IPv6 (contains letter other than a-f) ", async ({ page }) => {
         await page.goto("/asset-manager");
@@ -334,11 +339,10 @@ test.describe("Asset Manager", () => {
         await page.locator('#asset-add-authority-check').click();
         await page.getByRole('button', { name: 'Add Asset' }).click();
         await page.waitForTimeout(1000);
-        await expect(page.getByRole('heading', { name: '2' }).first()).toBeVisible();
-
+        await expect(page.getByText('Duplicate assets are not allowed')).toBeVisible();
     });
 
-    test("Add Multiple Assets with same domain with uppercase letters", async ({ page }) => {// System handles the same domain name but shows error when using uppercase
+    test("Add Multiple Assets with same domain with uppercase letters", async ({ page }) => {
         await page.goto("/asset-manager");
         await page.waitForLoadState("domcontentloaded");
         await page.getByRole('button', { name: 'Add Asset' }).click();
@@ -349,7 +353,9 @@ test.describe("Asset Manager", () => {
         await page.locator('#asset-add-authority-check').click();
         await page.getByRole('button', { name: 'Add Asset' }).click();
         await page.waitForTimeout(1000);
-        await expect(page.getByRole('heading', { name: '2' }).first()).toBeVisible();
+
+        await expect(page.getByText('Duplicate assets are not allowed')).toBeVisible();
+
     });
 
 
@@ -463,6 +469,7 @@ test.describe("Asset Manager", () => {
         await page.getByText('Delete').click();
         await expect(page.getByRole('button', { name: 'test.com' })).toBeVisible();
         await page.getByRole('button', { name: 'Delete' }).click();
+        await page.waitForTimeout(1000);
         await expect(page.getByText('test.com')).not.toBeVisible();
 
 

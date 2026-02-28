@@ -1,0 +1,255 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - button "Consent Preferences" [ref=e3] [cursor=pointer]:
+    - img "Revisit consent button" [ref=e4]
+  - generic [ref=e6]:
+    - generic [ref=e8] [cursor=pointer]:
+      - alert [ref=e9]:
+        - img [ref=e12]
+        - generic [ref=e15]:
+          - generic [ref=e17]: Successful
+          - generic [ref=e19]: Your assets have been deleted.
+      - img [ref=e21]
+      - progressbar [ref=e25]
+    - banner [ref=e26]:
+      - generic [ref=e27]:
+        - generic "Use Test Data to Explore the Application" [ref=e29] [cursor=pointer]:
+          - img [ref=e30]
+          - generic [ref=e32]: Test Mode
+        - generic [ref=e33]:
+          - button "Smart Assistant" [ref=e34] [cursor=pointer]:
+            - img [ref=e36]
+            - generic [ref=e40]: Smart Assistant
+          - separator [ref=e41]
+          - button "Scan Generator" [ref=e42] [cursor=pointer]:
+            - img [ref=e44]
+            - text: Scan Generator
+          - separator [ref=e48]
+          - button [ref=e49] [cursor=pointer]:
+            - img [ref=e51]
+          - separator [ref=e54]
+          - button "H" [ref=e55] [cursor=pointer]:
+            - generic [ref=e56]: H
+    - generic [ref=e57]:
+      - navigation [ref=e58]:
+        - button [ref=e59] [cursor=pointer]:
+          - img [ref=e60]
+        - generic [ref=e62]:
+          - region "scrollable content" [ref=e68]:
+            - generic [ref=e69]:
+              - link "S4E Free" [ref=e72] [cursor=pointer]:
+                - /url: /
+                - generic [ref=e73]:
+                  - img "S4E" [ref=e74]
+                  - generic [ref=e75]: Free
+              - generic [ref=e76]:
+                - list [ref=e77]:
+                  - listitem [ref=e78]:
+                    - generic [ref=e79]: General
+                  - link "Dashboard" [ref=e81] [cursor=pointer]:
+                    - /url: /
+                    - button "Dashboard" [ref=e82]:
+                      - img [ref=e84]
+                      - generic [ref=e87]: Dashboard
+                  - link "Insights" [ref=e89] [cursor=pointer]:
+                    - /url: /insights
+                    - button "Insights" [ref=e90]:
+                      - img [ref=e92]
+                      - generic [ref=e95]: Insights
+                  - link "Asset Manager" [ref=e97] [cursor=pointer]:
+                    - /url: /asset-manager?per_page=100&page=0
+                    - button "Asset Manager" [ref=e98]:
+                      - img [ref=e100]
+                      - generic [ref=e103]: Asset Manager
+                      - img [ref=e104]
+                - list [ref=e108]:
+                  - listitem [ref=e109]:
+                    - generic [ref=e110]: Scans
+                  - button "Start" [ref=e112] [cursor=pointer]:
+                    - img [ref=e114]
+                    - generic [ref=e117]: Start
+                    - img [ref=e118]
+                  - button "Manage" [ref=e121] [cursor=pointer]:
+                    - img [ref=e123]
+                    - generic [ref=e127]: Manage
+                    - img [ref=e128]
+                  - button "Activities" [ref=e131] [cursor=pointer]:
+                    - img [ref=e133]
+                    - generic [ref=e137]: Activities
+                    - img [ref=e138]
+                - list [ref=e140]:
+                  - listitem [ref=e141]:
+                    - generic [ref=e142]: Results
+                  - button "Scan Reports" [ref=e144] [cursor=pointer]:
+                    - img [ref=e146]
+                    - generic [ref=e149]: Scan Reports
+                    - img [ref=e150]
+                  - button "Crawler Results" [ref=e153] [cursor=pointer]:
+                    - img [ref=e155]
+                    - generic [ref=e160]: Crawler Results
+                    - img [ref=e161]
+                  - link "security.txt Reports" [ref=e164] [cursor=pointer]:
+                    - /url: /security-txt-reports
+                    - button "security.txt Reports" [ref=e165]:
+                      - img [ref=e167]
+                      - generic [ref=e170]: security.txt Reports
+                  - link "Data Explorer" [ref=e172] [cursor=pointer]:
+                    - /url: /data-explorer
+                    - button "Data Explorer" [ref=e173]:
+                      - img [ref=e175]
+                      - generic [ref=e178]: Data Explorer
+          - generic [ref=e179]:
+            - button "Upgrade Plan" [ref=e180] [cursor=pointer]:
+              - img [ref=e182]
+              - text: Upgrade Plan
+            - generic [ref=e184]:
+              - link "Status" [ref=e185] [cursor=pointer]:
+                - /url: https://status.s4e.io/status
+              - separator [ref=e186]
+              - generic [ref=e189] [cursor=pointer]: v4.1.0
+      - main [ref=e190]:
+        - generic [ref=e191]:
+          - generic [ref=e195]:
+            - heading "Asset Manager" [level=3] [ref=e196]
+            - navigation [ref=e197]:
+              - list [ref=e198]:
+                - listitem [ref=e199]:
+                  - generic [ref=e200]:
+                    - img [ref=e203]
+                    - separator [ref=e205]
+                    - link "Main" [ref=e206] [cursor=pointer]:
+                      - /url: /
+                      - generic [ref=e207]: Main
+                - listitem [ref=e208]
+                - listitem [ref=e210]:
+                  - link "Asset Manager":
+                    - /url: /asset-manager
+                    - generic: Asset Manager
+          - generic [ref=e211]:
+            - generic [ref=e214]:
+              - generic [ref=e217]:
+                - generic [ref=e219] [cursor=pointer]:
+                  - generic [ref=e220]:
+                    - img [ref=e222]
+                    - generic [ref=e224]: Unverified Assets
+                  - heading "0" [level=4] [ref=e226]
+                  - separator [ref=e227]
+                - generic [ref=e229] [cursor=pointer]:
+                  - generic [ref=e230]:
+                    - img [ref=e232]
+                    - generic [ref=e234]: Verified Assets
+                  - heading "0" [level=4] [ref=e236]
+                  - separator [ref=e237]
+                - generic [ref=e239] [cursor=pointer]:
+                  - generic [ref=e240]:
+                    - img [ref=e242]
+                    - generic [ref=e244]: Advanced Security Disable
+                  - heading "0" [level=4] [ref=e246]
+                  - separator [ref=e247]
+                - generic [ref=e249] [cursor=pointer]:
+                  - generic [ref=e250]:
+                    - img [ref=e252]
+                    - generic [ref=e254]: Total IP
+                  - heading "0" [level=4] [ref=e256]
+                  - separator [ref=e257]
+                - generic [ref=e259] [cursor=pointer]:
+                  - generic [ref=e260]:
+                    - img [ref=e262]
+                    - generic [ref=e264]: Total Domain
+                  - heading "0" [level=4] [ref=e266]
+                  - separator [ref=e267]
+                - generic [ref=e269]:
+                  - generic [ref=e270]:
+                    - img [ref=e272]
+                    - generic [ref=e274]: License Count
+                  - generic [ref=e275]:
+                    - heading "0/0" [level=6] [ref=e276]
+                    - button "Upgrade" [ref=e277] [cursor=pointer]: Upgrade
+              - img [ref=e280] [cursor=pointer]
+            - generic [ref=e283]:
+              - generic [ref=e284]:
+                - generic [ref=e285]:
+                  - generic [ref=e287]:
+                    - textbox "Search" [ref=e288]
+                    - generic [ref=e289]:
+                      - generic "You can search by asset and scan name" [ref=e290]:
+                        - img [ref=e291]
+                      - button [ref=e294] [cursor=pointer]:
+                        - img [ref=e295]
+                    - group
+                  - button "Labels" [ref=e297] [cursor=pointer]:
+                    - generic [ref=e298]: Labels
+                    - img [ref=e300]
+                  - button "Asset Type" [ref=e302] [cursor=pointer]:
+                    - generic [ref=e303]: Asset Type
+                    - img [ref=e305]
+                  - button "Verify Status" [ref=e307] [cursor=pointer]:
+                    - generic [ref=e308]: Verify Status
+                    - img [ref=e310]
+                  - button "Advanced Security" [ref=e312] [cursor=pointer]:
+                    - generic [ref=e313]: Advanced Security
+                    - img [ref=e315]
+                  - button "Detection Source" [ref=e317] [cursor=pointer]:
+                    - generic [ref=e318]: Detection Source
+                    - img [ref=e320]
+                  - button "More" [ref=e322] [cursor=pointer]:
+                    - generic [ref=e323]: More
+                    - img [ref=e325]
+                - generic [ref=e327]:
+                  - button "Export" [disabled]:
+                    - generic:
+                      - img
+                    - text: Export
+                  - button "Add asset" [ref=e328] [cursor=pointer]: Add asset
+              - table [ref=e330]:
+                - row "No Data Found No Data Found" [ref=e331]:
+                  - cell "No Data Found No Data Found" [ref=e332]:
+                    - generic [ref=e334]:
+                      - img "No Data Found" [ref=e336]
+                      - generic [ref=e338]: No Data Found
+                - rowgroup [ref=e339]:
+                  - 'row "Rows per page: 100 0-0 of 0 Go to first page Go to previous page Go to next page Go to last page" [ref=e340]':
+                    - 'cell "Rows per page: 100 0-0 of 0 Go to first page Go to previous page Go to next page Go to last page" [ref=e341]':
+                      - generic [ref=e344]:
+                        - paragraph [ref=e345]: "Rows per page:"
+                        - generic [ref=e346]:
+                          - 'combobox "Rows per page: 100" [ref=e347] [cursor=pointer]': "100"
+                          - textbox: "100"
+                          - img
+                        - paragraph [ref=e348]: 0-0 of 0
+                        - generic [ref=e349]:
+                          - button "Go to first page" [disabled]:
+                            - img
+                          - button "Go to previous page" [disabled]:
+                            - img
+                          - button "Go to next page" [disabled]:
+                            - img
+                          - button "Go to last page" [disabled]:
+                            - img
+  - alert [ref=e350]: Asset Manager | S4E
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - button "Feedback - Show survey" [ref=e351] [cursor=pointer]:
+                - img [ref=e353]
+                - generic [ref=e355]: Feedback
+              - dialog:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - heading [level=2]: How would you rate your experience?
+                          - radiogroup:
+                            - generic:
+                              - generic: Not good at all
+                              - generic: Very good
+                        - generic:
+                          - generic:
+                            - button [disabled]: Next
+```
